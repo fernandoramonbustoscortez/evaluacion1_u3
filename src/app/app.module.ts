@@ -9,6 +9,14 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { UsuariosPageComponent } from './pages/usuarios-page/usuarios-page.component';
 import { EgresosPageComponent } from './pages/egresos-page/egresos-page.component';
+import { LoginService } from './services/login.service';
+import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './services/user-service.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+import { EgresoService } from './services/egreso-service.service';
 
 @NgModule({
   declarations: [
@@ -17,14 +25,19 @@ import { EgresosPageComponent } from './pages/egresos-page/egresos-page.componen
     EgresosComponent,
     LoginPageComponent,
     NavbarComponent,
-    UsuariosPageComponent,
-    EgresosPageComponent
+    EgresosPageComponent,
+    UsuariosPageComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    NgbModule, // Asegúrate de agregar HttpClientModule aquí
+
   ],
-  providers: [],
+  providers: [LoginService,UserService, EgresoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

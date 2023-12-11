@@ -1,1 +1,62 @@
-<p>usuarios-page works!</p>
+<div class="container mt-5">
+  <h2 class="mb-4">Usuarios</h2>
+
+  <!-- Botón para abrir el formulario de creación -->
+  <button class="btn btn-primary mb-3" (click)="openCreateForm()">Agregar Usuario</button>
+
+  <!-- Tabla de usuarios -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NOMBRES</th>
+        <th>CORREO</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Itera sobre la lista de usuarios -->
+      <tr *ngFor="let user of this.users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.nombres }}</td>
+        <td>{{ user.correo }}</td>
+        <td>
+          <!-- Botones para editar y eliminar -->
+          <app-egresos-usuario [egresos]="user.egresos!"></app-egresos-usuario>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Formulario de creación/edición -->
+  <div class="modal" [ngClass]="{ 'd-block': isFormVisible }">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{ formTitle }}</h4>
+          <button type="button" class="close" aria-label="Close" (click)="closeForm()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario de usuarios -->
+          <form (ngSubmit)="submitForm()">
+            <div class="form-group">
+              <label for="nombres">Nombres:</label>
+              <input type="text" class="form-control" id="nombres" name="nombres" [(ngModel)]="formData.nombres" required>
+            </div>
+            <div class="form-group">
+              <label for="correo">Correo:</label>
+              <input type="email" class="form-control" id="correo" name="correo" [(ngModel)]="formData.correo" required>
+            </div>
+            <div class="form-group">
+              <label for="contrasena">Contraseña:</label>
+              <input type="password" class="form-control" id="contrasena" name="contrasena" [(ngModel)]="formData.contrasena" required>
+            </div>
+            <button type="submit" class="btn btn-primary">{{ submitBtnLabel }}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,59 @@
-<p>egresos-page works!</p>
+<div class="container mt-5">
+  <h2 class="mb-4">Egresos</h2>
+
+  <!-- Botón para abrir el formulario de creación -->
+  <button class="btn btn-primary mb-3" (click)="openCreateForm()">Añadir Egreso</button>
+
+  <!-- Tabla de usuarios -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descripcion</th>
+        <th>Monto</th>
+        <th>Fecha</th>
+        <th>Usuario Nombre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Itera sobre la lista de usuarios -->
+      <tr *ngFor="let egreso of this.egresos">
+        <td>{{ egreso.id }}</td>
+        <td>{{ egreso.descripcion }}</td>
+        <td>{{ egreso.monto }}</td>
+        <td>{{ egreso.fecha }}</td>
+        <td>{{ egreso.usuario }}</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Formulario de creación/edición -->
+  <div class="modal" [ngClass]="{ 'd-block': isFormVisible }">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{ formTitle }}</h4>
+          <button type="button" class="close" aria-label="Close" (click)="closeForm()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario de usuarios -->
+          <form (ngSubmit)="submitForm()">
+            <div class="form-group">
+              <label for="descripcion">Descripcion:</label>
+              <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="formData.descripcion" required>
+            </div>
+            <div class="form-group">
+              <label for="monto">Monto:</label>
+              <input type="email" class="form-control" id="monto" name="monto" [(ngModel)]="formData.monto" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">{{ submitBtnLabel }}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

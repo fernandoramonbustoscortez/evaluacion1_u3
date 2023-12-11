@@ -1,1 +1,36 @@
-<p>egresos works!</p>
+<button class="btn btn-secondary" (click)="openModdal()">Ver Egresos</button>
+<div class="modal" [ngClass]="{ 'd-block': isFormVisible }">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Visualizando Egresos de este Usuario</h4>
+        <button type="button" class="close" aria-label="Close" (click)="closeForm()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <table>
+          <thead>
+            <td>ID</td>
+            <td>Descripcion</td>
+            <td>Monto</td>
+            <td>Fecha</td>
+
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let egreso of this.egresos">
+              <td>{{egreso.id}}</td>
+              <td>{{egreso.descripcion}}</td>
+              <td>{{egreso.monto}}</td>
+              <td>{{egreso.fecha}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
